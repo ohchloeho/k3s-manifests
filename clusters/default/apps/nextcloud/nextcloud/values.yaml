@@ -1,0 +1,26 @@
+service:
+  type: LoadBalancer
+  loadBalancerIP: 100.84.114.51
+
+ingress:
+  enabled: true
+  hosts:
+    - host: nextcloud.local
+      paths:
+        - /
+
+nextcloud:
+  host: nextcloud.local
+  username: admin
+  password: PandaServer749a-3
+  trustedDomains: ["nextcloud.local", "100.84.114.51", "192.168.50.230"]
+  extraVolumes:
+    - name: raid
+      raid:
+        server: "100.84.114.51"
+        path: /mnt/raid/nextcloud-data
+        readOnly: false
+  extraVolumeMounts:
+     - name: raid
+       mountPath: /var/www/html/data
+
